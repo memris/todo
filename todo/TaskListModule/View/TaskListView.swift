@@ -27,24 +27,33 @@ struct TaskListView: View {
                 Color(UIColor.secondarySystemBackground).ignoresSafeArea()
                 VStack {
                     List {
-                        ForEach(filteredTasks) { task in
-                            NavigationLink(value: NavigationRoute.taskDetail(task)) {
-                                VStack(alignment: .leading) {
-                                    Text(task.title)
-                                    Text(presenter.formatShortDate(date: task.creationDate))
-                                        .fontWeight(.light)
-                                        .font(.caption)
+                        ForEach(filteredTasks.indices, id: \.self) { index in
+                            HStack {
+                                TaskCompletionButton(task: $presenter.tasks[index], presenter: presenter)
+                                    .simultaneousGesture(TapGesture().onEnded {
+                                        presenter.tasks[index].isCompleted.toggle()
+                                        presenter.updateTask(presenter.tasks[index])
+                                    })
+                                
+                                NavigationLink(value: NavigationRoute.taskDetail(presenter.tasks[index])) {
+                                    VStack(alignment: .leading) {
+                                        Text(presenter.tasks[index].title)
+                                            .strikethrough(presenter.tasks[index].isCompleted)
+                                        Text(presenter.formatShortDate(date: presenter.tasks[index].creationDate))
+                                            .fontWeight(.light)
+                                            .font(.caption)
+                                    }
                                 }
-                            }
-                            .contextMenu {
-                                Button(role: .destructive) {
-                                    presenter.deleteTask(task)
-                                } label: {
-                                    Label("Удалить", systemImage: "trash")
+                                .contextMenu {
+                                    Button(role: .destructive) {
+                                        presenter.deleteTask(presenter.tasks[index])
+                                    } label: {
+                                        Label("Удалить", systemImage: "trash")
+                                    }
                                 }
                             }
                         }
-                    }
+                    }                    
                     .navigationTitle("Задачи")
                     .searchable(text: $searchQuery, prompt: "Найти")
                     
@@ -58,7 +67,6 @@ struct TaskListView: View {
                             .font(.title)
                             .padding(.leading,200)
                     }
-                    
                 }
                 .navigationDestination(for: NavigationRoute.self) { route in
                     switch route {

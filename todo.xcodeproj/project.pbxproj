@@ -19,6 +19,7 @@
 		CEFBE2212CEE3613006662AB /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFBE2202CEE3613006662AB /* TaskListView.swift */; };
 		CEFBE2232CEE3CA7006662AB /* TaskResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFBE2222CEE3CA7006662AB /* TaskResponse.swift */; };
 		CEFBE2252CEE707E006662AB /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFBE2242CEE707E006662AB /* TaskDetailView.swift */; };
+		CEFBE2292CF249F6006662AB /* TaskCompletionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFBE2282CF249F6006662AB /* TaskCompletionButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		CEFBE2202CEE3613006662AB /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		CEFBE2222CEE3CA7006662AB /* TaskResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskResponse.swift; sourceTree = "<group>"; };
 		CEFBE2242CEE707E006662AB /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
+		CEFBE2282CF249F6006662AB /* TaskCompletionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCompletionButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 		CEFBE1FD2CEE1037006662AB /* todo */ = {
 			isa = PBXGroup;
 			children = (
+				CEFBE2272CF249D2006662AB /* Views */,
 				CEFBE2132CEE1400006662AB /* Entities */,
 				CEFBE2112CEE139A006662AB /* TaskListModule */,
 				CEFBE2122CEE13AE006662AB /* TaskDetailModule */,
@@ -155,6 +158,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		CEFBE2272CF249D2006662AB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CEFBE2282CF249F6006662AB /* TaskCompletionButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -226,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEFBE21D2CEE35F3006662AB /* TaskListPresenter.swift in Sources */,
+				CEFBE2292CF249F6006662AB /* TaskCompletionButton.swift in Sources */,
 				CEFBE2232CEE3CA7006662AB /* TaskResponse.swift in Sources */,
 				CEFBE2082CEE1039006662AB /* Persistence.swift in Sources */,
 				CEFBE2252CEE707E006662AB /* TaskDetailView.swift in Sources */,
