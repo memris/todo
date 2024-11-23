@@ -14,4 +14,6 @@ class TaskListRouter {
         return TaskListView(presenter: presenter)
     }
 }
-
+enum NavigationRoute: Hashable {
+    case taskDetail(Task)
+}
