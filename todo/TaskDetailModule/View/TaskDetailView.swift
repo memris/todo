@@ -20,7 +20,9 @@ struct TaskDetailView: View {
             TextField("Введите заголовок", text: $task.title)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal)
-
+            Text(presenter.formatShortDate(date: task.creationDate))
+                .fontWeight(.light)
+                .font(.caption)
             Text("Описание задачи")
                 .font(.headline)
             TextField("Введите описание", text: $task.taskDescription)

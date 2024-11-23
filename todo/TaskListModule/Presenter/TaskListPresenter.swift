@@ -41,6 +41,11 @@ class TaskListPresenter: ObservableObject {
         }
     }
 
+    func formatShortDate(date: Date) -> String {
+          let formatter = DateFormatter()
+          formatter.dateFormat = "dd/MM/yy"
+          return formatter.string(from: date)
+      }
 
     func searchTasks(query: String) {
         DispatchQueue.global(qos: .userInitiated).async {

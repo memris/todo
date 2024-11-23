@@ -29,7 +29,12 @@ struct TaskListView: View {
                     List {
                         ForEach(filteredTasks) { task in
                             NavigationLink(value: NavigationRoute.taskDetail(task)) {
-                                Text(task.title)
+                                VStack(alignment: .leading) {
+                                    Text(task.title)
+                                    Text(presenter.formatShortDate(date: task.creationDate))
+                                        .fontWeight(.light)
+                                        .font(.caption)
+                                }
                             }
                             .contextMenu {
                                 Button(role: .destructive) {
