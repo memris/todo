@@ -26,9 +26,18 @@ struct TaskListView: View {
             ZStack {
                 Color(UIColor.secondarySystemBackground).ignoresSafeArea()
                 VStack {
-                    List(filteredTasks) { task in
-                        NavigationLink(value: NavigationRoute.taskDetail(task)) {
-                            Text(task.title)
+                    List {
+                        ForEach(filteredTasks) { task in
+                            NavigationLink(value: NavigationRoute.taskDetail(task)) {
+                                Text(task.title)
+                            }
+                            .contextMenu {
+                                Button(role: .destructive) {
+                                    presenter.deleteTask(task)
+                                } label: {
+                                    Label("Удалить", systemImage: "trash")
+                                }
+                            }
                         }
                     }
                     .navigationTitle("Задачи")
