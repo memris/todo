@@ -66,6 +66,8 @@ struct TaskListView: View {
                         Image(systemName: "square.and.pencil")
                             .font(.title)
                             .padding(.leading,200)
+                            .foregroundStyle(.yellow)
+                            .shadow(radius: 0.2) 
                     }
                 }
                 .navigationDestination(for: NavigationRoute.self) { route in

@@ -28,10 +28,6 @@ struct TaskDetailView: View {
             TextField("Введите описание", text: $task.taskDescription)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal)
-
-            Toggle("Задача выполнена", isOn: $task.isCompleted)
-                .padding()
-
             Spacer()
         }
         .onDisappear {
