@@ -20,6 +20,7 @@
 		CEFBE2232CEE3CA7006662AB /* TaskResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFBE2222CEE3CA7006662AB /* TaskResponse.swift */; };
 		CEFBE2252CEE707E006662AB /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFBE2242CEE707E006662AB /* TaskDetailView.swift */; };
 		CEFBE2292CF249F6006662AB /* TaskCompletionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFBE2282CF249F6006662AB /* TaskCompletionButton.swift */; };
+		CEFBE22B2CF24E95006662AB /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFBE22A2CF24E95006662AB /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		CEFBE2222CEE3CA7006662AB /* TaskResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskResponse.swift; sourceTree = "<group>"; };
 		CEFBE2242CEE707E006662AB /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
 		CEFBE2282CF249F6006662AB /* TaskCompletionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCompletionButton.swift; sourceTree = "<group>"; };
+		CEFBE22A2CF24E95006662AB /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 				CEFBE2072CEE1039006662AB /* Persistence.swift */,
 				CEFBE2092CEE1039006662AB /* todo.xcdatamodeld */,
 				CEFBE2042CEE1039006662AB /* Preview Content */,
+				CEFBE22A2CF24E95006662AB /* CoreDataManager.swift */,
 			);
 			path = todo;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 				CEFBE2082CEE1039006662AB /* Persistence.swift in Sources */,
 				CEFBE2252CEE707E006662AB /* TaskDetailView.swift in Sources */,
 				CEFBE2212CEE3613006662AB /* TaskListView.swift in Sources */,
+				CEFBE22B2CF24E95006662AB /* CoreDataManager.swift in Sources */,
 				CEFBE2192CEE35CC006662AB /* Task.swift in Sources */,
 				CEFBE21B2CEE35DF006662AB /* TaskListInteractor.swift in Sources */,
 				CEFBE1FF2CEE1037006662AB /* todoApp.swift in Sources */,

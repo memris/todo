@@ -6,17 +6,40 @@
 //
 
 import SwiftUI
+import CoreData
 
 class TaskListInteractor {
-    private var tasks: [Task] = []
+    @Published var tasks: [Task] = []
 
     func fetchTasks(completion: @escaping ([Task]) -> Void) {
+        let context = CoreDataManager.shared.context
+
+        DispatchQueue.global(qos: .background).async {
+            let fetchRequest: NSFetchRequest<TaskEntity> = TaskEntity.fetchRequest()
+            do {
+                let entities = try context.fetch(fetchRequest)
+
+                DispatchQueue.main.async {
+                    self.tasks.removeAll() 
+                    self.tasks = entities.map { Task(entity: $0) }
+                    completion(self.tasks)
+                }
+            } catch {
+                print("Failed to fetch tasks from CoreData: \(error)")
+                DispatchQueue.main.async {
+                    completion([])
+                }
+            }
+        }
+    }
+
+    private func fetchTasksFromJSON(completion: @escaping ([Task]) -> Void) {
         guard let url = URL(string: "https://dummyjson.com/todos") else {
-            print("invalid URL")
+            print("Invalid URL")
             completion([])
             return
         }
-        
+
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 print("API Error: \(error.localizedDescription)")
@@ -25,7 +48,7 @@ class TaskListInteractor {
                 }
                 return
             }
-            
+
             guard let data = data else {
                 print("No data received from API")
                 DispatchQueue.main.async {
@@ -36,6 +59,7 @@ class TaskListInteractor {
 
             do {
                 let response = try JSONDecoder().decode(TaskResponse.self, from: data)
+                print("Fetched tasks from JSON: \(response.todos)")
                 DispatchQueue.main.async {
                     completion(response.todos)
                 }
@@ -48,6 +72,33 @@ class TaskListInteractor {
         }.resume()
     }
 
+    private func saveTasksToCoreData(_ tasks: [Task], completion: @escaping () -> Void) {
+        let backgroundContext = CoreDataManager.shared.persistentContainer.newBackgroundContext()
+        
+        backgroundContext.perform {
+            for task in tasks {
+                let entity = TaskEntity(context: backgroundContext)
+                entity.id = Int64(task.id)
+                entity.title = task.title
+                entity.isCompleted = task.isCompleted
+                entity.taskDescription = task.taskDescription
+                entity.creationDate = task.creationDate
+            }
+
+            do {
+                try backgroundContext.save()
+                print("Successfully saved tasks")
+                DispatchQueue.main.async {
+                    completion()
+                }
+            } catch {
+                print("Failed to save tasks to CoreData: \(error)")
+                DispatchQueue.main.async {
+                    completion()
+                }
+            }
+        }
+    }
 
     func saveTask(_ task: Task, completion: @escaping () -> Void) {
         DispatchQueue.global(qos: .background).async {
@@ -77,4 +128,12 @@ class TaskListInteractor {
             }
         }
     }
+    
+    func searchTasks(query: String, completion: @escaping ([Task]) -> Void) {
+//        print("search in interactor")
+          DispatchQueue.main.async {
+              let filteredTasks = self.tasks.filter { $0.title.lowercased().contains(query.lowercased()) }
+              completion(filteredTasks)
+          }
+      }
 }

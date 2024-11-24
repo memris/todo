@@ -8,18 +8,10 @@
 import SwiftUI
 
 struct TaskListView: View {
-    @StateObject var presenter: TaskListPresenter
+    @ObservedObject var presenter: TaskListPresenter
     @State private var searchQuery = ""
     @State private var newTask: Task? = nil
     @State private var navigationPath = NavigationPath()
-    
-    var filteredTasks: [Task] {
-        if searchQuery.isEmpty {
-            return presenter.tasks
-        } else {
-            return presenter.tasks.filter { $0.title.localizedCaseInsensitiveContains(searchQuery) }
-        }
-    }
     
     var body: some View {
         NavigationStack(path: $navigationPath) {
@@ -27,13 +19,9 @@ struct TaskListView: View {
                 Color(UIColor.secondarySystemBackground).ignoresSafeArea()
                 VStack {
                     List {
-                        ForEach(filteredTasks.indices, id: \.self) { index in
+                        ForEach(presenter.tasks.indices, id: \.self) { index in
                             HStack {
                                 TaskCompletionButton(task: $presenter.tasks[index], presenter: presenter)
-                                    .simultaneousGesture(TapGesture().onEnded {
-                                        presenter.tasks[index].isCompleted.toggle()
-                                        presenter.updateTask(presenter.tasks[index])
-                                    })
                                 
                                 NavigationLink(value: NavigationRoute.taskDetail(presenter.tasks[index])) {
                                     VStack(alignment: .leading) {
@@ -53,13 +41,16 @@ struct TaskListView: View {
                                 }
                             }
                         }
-                    }                    
+                    }
                     .navigationTitle("Задачи")
-                    .searchable(text: $searchQuery, prompt: "Найти")
-                    
+                    .searchable(text: $presenter.searchQuery)
+                    .onChange(of: presenter.searchQuery) {
+                        presenter.searchTasks(query: presenter.searchQuery)
+                    }
                     Button(action: {
                         let newId = (presenter.tasks.max(by: { $0.id < $1.id })?.id ?? 0) + 1
                         let newTask = Task(id: newId, title: "Новая задача", isCompleted: false, taskDescription: "")
+                        self.newTask = newTask
                         presenter.addTask(newTask)
                         navigationPath.append(NavigationRoute.taskDetail(newTask))
                     }) {
@@ -67,23 +58,25 @@ struct TaskListView: View {
                             .font(.title)
                             .padding(.leading,200)
                             .foregroundStyle(.yellow)
-                            .shadow(radius: 0.2) 
+                            .shadow(radius: 0.2)
                     }
                 }
                 .navigationDestination(for: NavigationRoute.self) { route in
                     switch route {
                     case .taskDetail(let task):
-                        TaskDetailView(
-                            task: task,
-                            presenter: presenter,
-                            isNewTask: newTask != nil,
-                            onSave: {
-                                if let newTask {
-                                    presenter.addTask(newTask)
-                                    self.newTask = nil
+                        if let taskIndex = presenter.tasks.firstIndex(where: { $0.id == task.id }) {
+                            TaskDetailView(
+                                task: $presenter.tasks[taskIndex],
+                                presenter: presenter,
+                                isNewTask: newTask != nil,
+                                onSave: {
+                                    if let newTask {
+                                        presenter.addTask(newTask)
+                                        self.newTask = nil
+                                    }
                                 }
-                            }
-                        )
+                            )
+                        }
                     }
                 }
             }

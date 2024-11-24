@@ -10,7 +10,7 @@ import SwiftUI
 struct TaskCompletionButton: View {
     @Binding var task: Task
     let presenter: TaskListPresenter
-    
+
     var body: some View {
         Button(action: {
         }) {
@@ -22,6 +22,9 @@ struct TaskCompletionButton: View {
                 )
                 .opacity(0.8)
         }
+        .simultaneousGesture(TapGesture().onEnded {
+            task.isCompleted.toggle()
+            CoreDataManager.shared.saveContext()
+        })
     }
 }
-

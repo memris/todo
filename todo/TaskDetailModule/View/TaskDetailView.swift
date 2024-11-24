@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct TaskDetailView: View {
-    @State var task: Task
+    @Binding var task: Task
     @ObservedObject var presenter: TaskListPresenter
     var isNewTask: Bool = false
     var onSave: (() -> Void)? = nil
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("Заголовок задачи")
@@ -20,6 +20,9 @@ struct TaskDetailView: View {
             TextField("Введите заголовок", text: $task.title)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal)
+                .onTapGesture {
+                    clearTitleIfNew()
+                }
             Text(presenter.formatShortDate(date: task.creationDate))
                 .fontWeight(.light)
                 .font(.caption)
@@ -30,19 +33,20 @@ struct TaskDetailView: View {
                 .padding(.horizontal)
             Spacer()
         }
-        .onDisappear {
-            saveTaskChanges()
-        }
         .padding()
         .navigationTitle(task.title.isEmpty ? "Новая задача" : task.title)
     }
 
-    private func saveTaskChanges() {
-        if isNewTask {
-            presenter.addTask(task)
-            onSave?()
-        } else {
-            presenter.updateTask(task)
+        private func saveTaskChanges() {
+            if isNewTask {
+                onSave?()
+            } else {
+                CoreDataManager.shared.saveContext()
+            }
+        }
+        private func clearTitleIfNew() {
+            if isNewTask && task.title == "Новая задача" {
+                task.title = ""
+            }
         }
     }
-}

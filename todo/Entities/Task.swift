@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 struct Task: Decodable, Identifiable, Hashable, Encodable {
     let id: Int
@@ -38,6 +39,14 @@ struct Task: Decodable, Identifiable, Hashable, Encodable {
         taskDescription = try container.decodeIfPresent(String.self, forKey: .taskDescription) ?? ""
         creationDate = try container.decodeIfPresent(Date.self, forKey: .creationDate) ?? Date()
     }
+    
+    init(entity: TaskEntity) {
+            self.id = Int(entity.id)
+            self.title = entity.title ?? ""
+            self.isCompleted = entity.isCompleted
+            self.taskDescription = entity.taskDescription ?? ""
+            self.creationDate = entity.creationDate ?? Date()
+        }
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
