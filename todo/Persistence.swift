@@ -49,7 +49,15 @@ struct PersistenceController {
     let container: NSPersistentContainer
 
     init(inMemory: Bool = false) {
+        
         container = NSPersistentContainer(name: "todo")
+        let model1 = container.managedObjectModel
+        let model2 = NSPersistentContainer(name: "todo").managedObjectModel
+
+        if model1 != model2 {
+            print("Модели не совпадают!")
+        }
+
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }

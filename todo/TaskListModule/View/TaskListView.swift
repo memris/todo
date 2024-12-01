@@ -84,10 +84,10 @@ struct TaskListView: View {
     }
 }
 
-struct TaskListView_Previews: PreviewProvider {
-    static var previews: some View {
-        let interactor = TaskListInteractor()
-        let presenter = TaskListPresenter(interactor: interactor)
-        return TaskListView(presenter: presenter)
-    }
-}
+//struct TaskListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let interactor = TaskListInteractor()
+//        let presenter = TaskListPresenter(interactor: interactor)
+//        return TaskListView(presenter: presenter)
+//    }
+//}
