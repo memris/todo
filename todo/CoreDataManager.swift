@@ -14,8 +14,11 @@ class CoreDataManager {
     let persistentContainer: NSPersistentContainer
     
     private init() {
-//        print("Init coredata manager")
         persistentContainer = NSPersistentContainer(name: "todo")
+        let description = persistentContainer.persistentStoreDescriptions.first
+           description?.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+           description?.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
+           
         persistentContainer.loadPersistentStores { _, error in
             if let error = error {
                 fatalError("Unable to load persistent: \(error)")

@@ -9,11 +9,10 @@ import SwiftUI
 
 @main
 struct todoApp: App {
-    let persistenceController = PersistenceController.shared
-
     var body: some Scene {
         WindowGroup {
             TaskListRouter.createModule()
+                .environment(\.managedObjectContext, CoreDataManager.shared.context)
         }
     }
 }

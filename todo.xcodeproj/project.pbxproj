@@ -13,7 +13,6 @@
 		CEFBE1FF2CEE1037006662AB /* todoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFBE1FE2CEE1037006662AB /* todoApp.swift */; };
 		CEFBE2032CEE1039006662AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEFBE2022CEE1039006662AB /* Assets.xcassets */; };
 		CEFBE2062CEE1039006662AB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEFBE2052CEE1039006662AB /* Preview Assets.xcassets */; };
-		CEFBE2082CEE1039006662AB /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFBE2072CEE1039006662AB /* Persistence.swift */; };
 		CEFBE20B2CEE1039006662AB /* todo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CEFBE2092CEE1039006662AB /* todo.xcdatamodeld */; };
 		CEFBE2192CEE35CC006662AB /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFBE2182CEE35CC006662AB /* Task.swift */; };
 		CEFBE21B2CEE35DF006662AB /* TaskListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFBE21A2CEE35DF006662AB /* TaskListInteractor.swift */; };
@@ -45,7 +44,6 @@
 		CEFBE1FE2CEE1037006662AB /* todoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = todoApp.swift; sourceTree = "<group>"; };
 		CEFBE2022CEE1039006662AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEFBE2052CEE1039006662AB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		CEFBE2072CEE1039006662AB /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		CEFBE20A2CEE1039006662AB /* todo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = todo.xcdatamodel; sourceTree = "<group>"; };
 		CEFBE2182CEE35CC006662AB /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		CEFBE21A2CEE35DF006662AB /* TaskListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListInteractor.swift; sourceTree = "<group>"; };
@@ -113,7 +111,6 @@
 				CEFBE2122CEE13AE006662AB /* TaskDetailModule */,
 				CEFBE1FE2CEE1037006662AB /* todoApp.swift */,
 				CEFBE2022CEE1039006662AB /* Assets.xcassets */,
-				CEFBE2072CEE1039006662AB /* Persistence.swift */,
 				CEFBE2092CEE1039006662AB /* todo.xcdatamodeld */,
 				CEFBE2042CEE1039006662AB /* Preview Content */,
 				CEFBE22A2CF24E95006662AB /* CoreDataManager.swift */,
@@ -318,7 +315,6 @@
 				CEFBE21D2CEE35F3006662AB /* TaskListPresenter.swift in Sources */,
 				CEFBE2292CF249F6006662AB /* TaskCompletionButton.swift in Sources */,
 				CEFBE2232CEE3CA7006662AB /* TaskResponse.swift in Sources */,
-				CEFBE2082CEE1039006662AB /* Persistence.swift in Sources */,
 				CEFBE2252CEE707E006662AB /* TaskDetailView.swift in Sources */,
 				CEFBE2212CEE3613006662AB /* TaskListView.swift in Sources */,
 				CEFBE22B2CF24E95006662AB /* CoreDataManager.swift in Sources */,

@@ -29,7 +29,6 @@ class TaskListPresenter: ObservableObject {
     func addTask(_ task: Task) {
         let context = CoreDataManager.shared.context
         let entity = TaskEntity(context: context)
-        
         entity.id = Int64(task.id)
         entity.title = task.title
         entity.isCompleted = task.isCompleted
@@ -38,12 +37,12 @@ class TaskListPresenter: ObservableObject {
         
         do {
             try context.save()
-            tasks.insert(task, at: 0)
+            tasks.append(task)
         } catch {
             print("Failed to save new task: \(error)")
         }
     }
-    
+
     
     func deleteTask(_ task: Task) {
         interactor.deleteTask(task) { [weak self] in
